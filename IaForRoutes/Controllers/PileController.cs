@@ -3,20 +3,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace IaForRoutes.Controllers
 {
-    public class PileController
+    public class PileController : Controller
     {
-        private int Size { get; set; }
-        private City[] CityList { get; set; }
-        private int Top { get; set; }
+        public static PileViewModel pileViewModel { get; set; }
+        public PileController()
+        {
+            if (pileViewModel == null)
+                pileViewModel = new PileViewModel();
+        }
 
         public PileController(int size)
         {
-            Size = size;
-            CityList = new City[size];
-            Top = -1;
+            if (pileViewModel == null) 
+                pileViewModel = new PileViewModel();
+            pileViewModel.Size = size;
+            pileViewModel.CityList = new City[size];
+            pileViewModel.Top = -1;
         }
 
         public void StackUp(City city)
@@ -24,16 +30,24 @@ namespace IaForRoutes.Controllers
             if (!IsFull())
             {
                 //++Top, sum 1 to Top and later use Top
-                CityList[++Top] = city;
+                pileViewModel.CityList[++pileViewModel.Top] = city;
+            }
+            else
+            {
+                throw new Exception("The list is full.");
             }
         }
 
+        /// <summary>
+        /// Get the last City object in pile
+        /// </summary>
+        /// <returns>Last City object in pile CityList</returns>
         public City ToUnpack()
         {
             if (!IsEmpty())
             {
                 //Top--, use Top and later reduce 1
-                return CityList[Top--];
+                return pileViewModel.CityList[pileViewModel.Top--];
             }
             else
             {
@@ -43,25 +57,32 @@ namespace IaForRoutes.Controllers
 
         public City GetTopObject()
         {
-            return CityList[Top];
+            return pileViewModel.CityList[pileViewModel.Top];
         }
 
         public bool IsFull()
         {
-            return (CityList.Count() - 1) == Top;
+            return (pileViewModel.CityList.Count() - 1) == pileViewModel.Top;
         }
 
         public bool IsEmpty()
         {
-            return CityList.Count() == 0;
+            return pileViewModel.CityList.Count() == 0;
         }
 
-        public static void PilhaView()
+        //GET: /Pile/ListCities
+        public ActionResult ListCities()
         {
-            PileController pileController = new PileController(5);
+            PileController pileController = new PileController(3);
             Map map = new Map();
 
-            StackUp(map.PortoUniao);
+            pileController.StackUp(map.PortoUniao);
+            pileController.StackUp(map.CampoLargo);
+            pileController.StackUp(map.Canoinhas);
+
+            pileViewModel.CityList = pileViewModel.CityList.Where(c=>c != pileController.ToUnpack()).ToArray() ;
+
+            return View(pileViewModel);
         }
     }
 }
