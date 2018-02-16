@@ -16,6 +16,11 @@ namespace IaForRoutes.Controllers
                 pileViewModel = new PileViewModel();
         }
 
+        public City[] GetCityList()
+        {
+            return pileViewModel.CityList;
+        }
+
         public PileController(int size)
         {
             if (pileViewModel == null) 
@@ -80,7 +85,9 @@ namespace IaForRoutes.Controllers
             pileController.StackUp(map.CampoLargo);
             pileController.StackUp(map.Canoinhas);
 
-            pileViewModel.CityList = pileViewModel.CityList.Where(c=>c != pileController.ToUnpack()).ToArray() ;
+            //pileViewModel.City = GetTopObject();
+            pileViewModel.City = ToUnpack();
+            //pileViewModel.CityList = pileViewModel.CityList.Where(c=>c != pileController.ToUnpack()).ToArray();
 
             return View(pileViewModel);
         }

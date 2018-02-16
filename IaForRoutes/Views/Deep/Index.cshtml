@@ -1,0 +1,29 @@
+﻿@using IaForRoutes.Models
+@model IEnumerable<IaForRoutes.Models.OutInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (OutInfo outInfo in Model) {
+    <tr>
+        <td>
+            @outInfo.Title
+        </td>
+        <td>
+            @outInfo.Value
+        </td>
+    </tr>
+}
+
+</table>

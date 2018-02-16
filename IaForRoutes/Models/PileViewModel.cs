@@ -10,5 +10,6 @@ namespace IaForRoutes.Models
         public int Size { get; set; }
         public City[] CityList { get; set; }
         public int Top { get; set; }
+        public City City { get; set; }
     }
 }
