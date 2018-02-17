@@ -197,11 +197,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AStarController.cs" />
     <Compile Include="Controllers\DeepController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HungrySearchController.cs" />
     <Compile Include="Controllers\LineController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PileController.cs" />
+    <Compile Include="Controllers\VectorRelatedCityController.cs" />
+    <Compile Include="Controllers\VectorController.cs" />
+    <Compile Include="Controllers\WidthSearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -278,6 +283,10 @@
     <Content Include="Views\Pile\ListCities.cshtml" />
     <Content Include="Views\Deep\Index.cshtml" />
     <Content Include="Views\Line\Index.cshtml" />
+    <Content Include="Views\WidthSearch\Index.cshtml" />
+    <Content Include="Views\Vector\Index.cshtml" />
+    <Content Include="Views\HungrySearch\Index.cshtml" />
+    <Content Include="Views\AStar\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

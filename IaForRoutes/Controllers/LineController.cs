@@ -10,7 +10,7 @@ namespace IaForRoutes.Controllers
 {
     public class LineController : Controller
     {
-        private static LineViewModel lineViewModel { get; set; }
+        public static LineViewModel lineViewModel { get; set; }
         private List<OutInfo> OutInfo { get; set; }
 
         public LineController()
